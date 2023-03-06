@@ -55,3 +55,5 @@ I use 1.95 * sigmaSpatial formula. There's another one: Math.PI * 2 * sigmaSpati
 
 3. Kernel class have two LUT(Look Up Table) which I calculates before main run. One for Gaussian function. Another one for Intensity.
 It **drastically** increase performance.
+
+4. As you can notice on example images my code do not preserve the edges.
