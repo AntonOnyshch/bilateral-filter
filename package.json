@@ -1,0 +1,26 @@
+{
+  "name": "bilateral-filter",
+  "version": "1.0.0",
+  "description": "Bilateral filter",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./test/test.js",
+    "serve": "http-server ./",
+    "start": "tsc | http-server ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "betest": "^3.1.2",
+    "http-server": "^14.1.1",
+    "typescript": "^4.9.5"
+  },
+  "directories": {
+    "images": "images",
+    "lib": "lib",
+    "src": "src",
+    "test": "test"
+  }
+}

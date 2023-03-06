@@ -1,0 +1,11 @@
+{
+    "compilerOptions": 
+    {
+      "target": "ESNext",
+      "strictNullChecks": false,
+      "sourceMap": true,
+      "removeComments": true,
+      "outDir": "./lib"
+    },
+    "include": ["src/index.ts"],
+  }
