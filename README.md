@@ -44,10 +44,10 @@ Fabulous view on signal processing. Forceful explanation.
 
 # Other
 [ChatGPT](https://chat.openai.com/chat)
-I used this for javascript code. For example: "Give me javascript code of bilateral grid filter algorithm"
+I used this for javascript code. For example: "Give me javascript code of bilateral **grid** filter algorithm"
 
 ## About my code
-1. My filter is for [Grayscale](https://en.wikipedia.org/wiki/Grayscale). It means it works only with one(gray) chanel. Before pass pixels onto the filter i create a new array and fill it with only one chanel from 4(rgba) on original canvas image data.
+1. My filter is for [Grayscale](https://en.wikipedia.org/wiki/Grayscale). It means it only works with one(gray) chanel. Before pass pixels onto the filter i create a new array and fill it with only one chanel from 4(rgba) on original canvas image data.
 
 2. How do I calculate kernel size?
 I use 1.95 * sigmaSpatial formula. There's another one: Math.PI * 2 * sigmaSpatial;
