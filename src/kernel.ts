@@ -19,7 +19,9 @@ export class Kernel {
     public getSize() {
         return this.kernelSize;
     }
-
+    public getHalfKernelSize() {
+        return this.halfKernelSize;
+    }
     public setInputData(input: Uint8Array, width: number): void {
         this.input = input;
         this.width = width;
@@ -32,8 +34,8 @@ export class Kernel {
         this.calculateIntensityLUT(intensity);
     }
 
-    public run(cX: number, cY: number): number {
-        const centralPixel = this.input[cY * this.width + cX];
+    public run(cX: number, cY: number, centralPixelIndex: number): number {
+        const centralPixel = this.input[centralPixelIndex];
 
         let sumWeight = 0;
         let normalizeWeight = 0;
@@ -106,8 +108,8 @@ export class Kernel {
         const intensitySquare = 2 * (sigma * sigma);
 
         /**
-         * Calculate intensities functions for all of pixel intensity range, E.g. 0-255
-         */
+        * Calculate intensities functions for all of pixel intensity range, E.g. 0-255
+        */
         for (let i = 0; i < this.intensityLUT.length; i++) {
             this.intensityLUT[i] = intensity * Math.exp(-(Math.pow(i, 2) / intensitySquare));
         }
