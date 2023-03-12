@@ -6,6 +6,8 @@ export class GrayscaleBilateralFilter {
 
     private kernel: Kernel;
 
+    private input: Uint8Array;
+
     public readonly pixels: Uint8Array;
 
     constructor(width: number, height: number) {
@@ -16,6 +18,7 @@ export class GrayscaleBilateralFilter {
     }
 
     public setInputData(value: Uint8Array) {
+        this.input = value;
         this.kernel.setInputData(value, this.width);
     }
 
@@ -41,7 +44,7 @@ export class GrayscaleBilateralFilter {
                 height = y1 * width
                 for (let x = halfKernelSize; x < endWidth; x++) {
                     centralPixelIndex = height + x;
-                    result[centralPixelIndex] = this.kernel.run(x, y1, centralPixelIndex);
+                    result[centralPixelIndex] = this.kernel.run(x, y1, this.input[centralPixelIndex]);
                 }
             }
 

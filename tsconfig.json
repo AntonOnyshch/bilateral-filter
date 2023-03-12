@@ -2,6 +2,8 @@
     "compilerOptions": 
     {
       "target": "ESNext",
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
       "strictNullChecks": false,
       "sourceMap": true,
       "removeComments": true,

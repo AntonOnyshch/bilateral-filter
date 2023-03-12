@@ -42,8 +42,8 @@ betest.addGroup({
             test: function kernel() {
                 const kernel = new Kernel();
                 kernel.setInputData(imageMockup, 6);
-                kernel.setSigma(2, 10);
-                const res = kernel.run(1, 1);
+                kernel.setSigma(1, 1);
+                const res = kernel.run(1, 1, imageMockup[(1 * 6) + 1]);
                 return res;
             }
         }

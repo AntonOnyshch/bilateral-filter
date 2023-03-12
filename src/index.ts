@@ -104,7 +104,7 @@ async function applyBilateralFilter() {
 }
 (document.getElementById('sigmaIntensity') as HTMLInputElement).onchange = e => {
     sigmaIntensity = +(e.target as HTMLInputElement).value;
-    document.getElementById('sigmaSpatialText').textContent = sigmaIntensity.toString();
+    document.getElementById('sigmaIntensityText').textContent = sigmaIntensity.toString();
     bilateralFilter.setSigma(sigmaSpatial, sigmaIntensity);
     applyBilateralFilter();
 }

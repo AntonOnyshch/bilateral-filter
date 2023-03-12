@@ -34,9 +34,7 @@ export class Kernel {
         this.calculateIntensityLUT(intensity);
     }
 
-    public run(cX: number, cY: number, centralPixelIndex: number): number {
-        const centralPixel = this.input[centralPixelIndex];
-
+    public run(cX: number, cY: number, centralPixel: number): number {
         let sumWeight = 0;
         let normalizeWeight = 0;
         let weight = 0;
