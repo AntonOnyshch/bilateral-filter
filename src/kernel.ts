@@ -34,7 +34,7 @@ export class Kernel {
         this.calculateIntensityLUT(intensity);
     }
 
-    public run(startHeight: number, centralPixel: number): number {
+    public run(startPosition: number, centralPixel: number): number {
         let sumWeight = 0;
         let normalizeWeight = 0;
         let weight = 0;
@@ -46,7 +46,7 @@ export class Kernel {
         for (let i = 0; i < this.kernelSize; i++) {
 
             for (j = 0; j < this.kernelSize; j++) {
-                nearbyPixel = this.input[startHeight + j];
+                nearbyPixel = this.input[startPosition + j];
 
                 weight = this.gaussSpatialLUT[counter] * this.intensityLUT[Math.abs(nearbyPixel - centralPixel)];
                 sumWeight += weight * nearbyPixel;
@@ -54,7 +54,7 @@ export class Kernel {
                 
                 counter++;
             }
-            startHeight += this.width;
+            startPosition += this.width;
         }
 
         return sumWeight/normalizeWeight + 0.5 | 0;
