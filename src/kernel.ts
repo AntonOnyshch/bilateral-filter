@@ -60,31 +60,6 @@ export class Kernel {
         return sumWeight/normalizeWeight + 0.5 | 0;
     }
 
-    public run2(startKernelX: number, startHeight: number, centralPixel: number): number {
-        let sumWeight = 0;
-        let normalizeWeight = 0;
-        let weight = 0;
-        let nearbyPixel = 0;
-        let counter = 0;
-
-        let j = 0;
-        const endWidth = startKernelX + this.kernelSize;
-        for (let i = -this.halfKernelSize; i <= this.halfKernelSize; i++) {
-            j = startKernelX;
-            while (j < endWidth) {
-                nearbyPixel = this.input[startHeight + j];
-
-                weight = this.gaussSpatialLUT[counter] * this.intensityLUT[Math.abs(nearbyPixel - centralPixel)];
-                sumWeight += weight * nearbyPixel;
-                normalizeWeight += weight;
-                
-                j++;
-                counter++;
-            }
-            startHeight += this.width;
-        }
-        return sumWeight/normalizeWeight + 0.5 | 0;
-    }
     /**
      * Look Up Table for Gaussian function
      * @param {number} sigma Standard deviation. 
