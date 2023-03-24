@@ -36,16 +36,21 @@ export class GrayscaleBilateralFilter {
 
             const endHeight = this.height - halfKernelSize;
             const endWidth = this.width - halfKernelSize;
-            let height = 0;
+            const halfKernelSizeStride = halfKernelSize * width;
+
+            let height = halfKernelSize * width;
             let centralPixelIndex = 0;
+            let topLeftKernelIndex = 0;
             const t0 = performance.now();
 
-            for (let y1 = halfKernelSize; y1 < endHeight; y1++) {
-                height = y1 * width
-                for (let x = halfKernelSize; x < endWidth; x++) {
-                    centralPixelIndex = height + x;
-                    result[centralPixelIndex] = this.kernel.run(x, y1, this.input[centralPixelIndex]);
+            for (let i = halfKernelSize; i < endHeight; i++) {
+                topLeftKernelIndex = height - halfKernelSizeStride;
+                for (let j = halfKernelSize; j < endWidth; j++) {
+                    centralPixelIndex = height + j;
+                    result[centralPixelIndex] = this.kernel.run(topLeftKernelIndex + (j - halfKernelSize), this.input[centralPixelIndex]);
                 }
+
+                height += width;
             }
 
             console.log(performance.now() - t0);

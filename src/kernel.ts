@@ -34,41 +34,57 @@ export class Kernel {
         this.calculateIntensityLUT(intensity);
     }
 
-    public run(cX: number, cY: number, centralPixel: number): number {
+    public run(startHeight: number, centralPixel: number): number {
         let sumWeight = 0;
         let normalizeWeight = 0;
         let weight = 0;
-
-        let y = cY - this.halfKernelSize;
-        let x = cX - this.halfKernelSize;
-
         let nearbyPixel = 0;
-
-        const startX = x;
-
-        let height = 0;
         let counter = 0;
 
-        for (let i = -this.halfKernelSize; i <= this.halfKernelSize; i++) {
-            x = startX;
-            height = y*this.width;
-            for (let j = 0; j < this.kernelSize; j++) {
-                nearbyPixel = this.input[height + x];
+        let j = 0;
+
+        for (let i = 0; i < this.kernelSize; i++) {
+
+            for (j = 0; j < this.kernelSize; j++) {
+                nearbyPixel = this.input[startHeight + j];
 
                 weight = this.gaussSpatialLUT[counter] * this.intensityLUT[Math.abs(nearbyPixel - centralPixel)];
                 sumWeight += weight * nearbyPixel;
                 normalizeWeight += weight;
-    
-                x++;
+                
                 counter++;
             }
-            
-            y++;
+            startHeight += this.width;
         }
 
         return sumWeight/normalizeWeight + 0.5 | 0;
     }
 
+    public run2(startKernelX: number, startHeight: number, centralPixel: number): number {
+        let sumWeight = 0;
+        let normalizeWeight = 0;
+        let weight = 0;
+        let nearbyPixel = 0;
+        let counter = 0;
+
+        let j = 0;
+        const endWidth = startKernelX + this.kernelSize;
+        for (let i = -this.halfKernelSize; i <= this.halfKernelSize; i++) {
+            j = startKernelX;
+            while (j < endWidth) {
+                nearbyPixel = this.input[startHeight + j];
+
+                weight = this.gaussSpatialLUT[counter] * this.intensityLUT[Math.abs(nearbyPixel - centralPixel)];
+                sumWeight += weight * nearbyPixel;
+                normalizeWeight += weight;
+                
+                j++;
+                counter++;
+            }
+            startHeight += this.width;
+        }
+        return sumWeight/normalizeWeight + 0.5 | 0;
+    }
     /**
      * Look Up Table for Gaussian function
      * @param {number} sigma Standard deviation. 

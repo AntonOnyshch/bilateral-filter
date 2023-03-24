@@ -38,16 +38,31 @@ betest.addGroup({
             }
         },
         {
-            expected: 192,
-            test: function kernel() {
+            expected: 189,
+            test: function kernel2Loop() {
                 const kernel = new Kernel();
                 kernel.setInputData(imageMockup, 6);
                 kernel.setSigma(1, 1);
+                const t0 = performance.now();
                 const res = kernel.run(1, 1, imageMockup[(1 * 6) + 1]);
+                console.info(performance.now() - t0);
+                return res;
+            }
+        },
+        {
+            expected: 189,
+            test: function kernel1Loop() {
+                const kernel = new Kernel();
+                kernel.setInputData(imageMockup, 6);
+                kernel.setSigma(1, 1);
+                const t0 = performance.now();
+                const res = kernel.run2(1, 1, imageMockup[(1 * 6) + 1]);
+                console.info(performance.now() - t0);
                 return res;
             }
         }
     ]
 });
-betest.runAll();
-//betest.runTest('Kernel', 'kernel');
+//betest.runAll();
+betest.runTest('Kernel', 'kernel2Loop');
+betest.runTest('Kernel', 'kernel1Loop');
